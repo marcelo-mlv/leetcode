@@ -1,10 +1,25 @@
 class Solution {
     public:
-        bool checkPowersOfThree(int n) {
-            if(n == 0)
-                return true;
-            if(n%3 == 2)
-                return false;
-            return checkPowersOfThree(n/3);
+        vector<int> pivotArray(vector<int>& nums, int pivot) {
+            vector<int> less;
+            vector<int> greater;
+            int numPivot = 0;
+            for(int i = 0; i < nums.size(); i++) {
+                if(nums[i] < pivot) {
+                    less.push_back(nums[i]);
+                }
+                else if(nums[i] > pivot) {
+                    greater.push_back(nums[i]);
+                }
+                else numPivot++;
+            }
+            while(numPivot != 0) {
+                less.push_back(pivot);
+                numPivot--;
+            }
+            for(int i = 0; i < greater.size(); i++) {
+                less.push_back(greater[i]);
+            }
+            return less;
         }
     };
